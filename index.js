@@ -68,6 +68,15 @@ async function run() {
       const result = await imagePostCollection.insertOne(newPost)
       res.send(result)
     })
+
+    // get my image post
+    app.get('/post/myimage', async (req, res) => {
+      const email = req.query.email
+      const query = { email: email }
+      const cursor = imagePostCollection.find(query)
+      const result = await cursor.toArray()
+      res.send(result)
+    })
   } finally {
   }
 }
